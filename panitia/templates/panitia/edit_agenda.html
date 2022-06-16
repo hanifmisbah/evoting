@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-7">
+    <h5>Tambah Agenda</h5>
+    <form action="" method="POST">
+  {% csrf_token %}
+    
+      <div class="mb-3">
+        <label for="judul" class="form-label">Judul Agenda</label>
+        <input type="text" class="form-control" value="{{data.judul}}" id="judul" name="judul" aria-describedby="emailHelp" capitalize>
+      </div>
+      <div class="mb-3">
+        <label for="waktu_awal" class="form-label">Waktu Mulai</label>
+        <input type="datetime-local" class="form-control" value="{{data.waktu_awal}}" id="waktu_awal" name="waktu_awal">
+      </div>
+      <div class="mb-3">
+        <label for="waktu_akhir" class="form-label">Waktu Selesai</label>
+        <input type="datetime-local" class="form-control"  value="{{data.waktu_akhir}}" id="waktu_akhir" name="waktu_akhir">
+      </div>
+      <!-- <div class="mb-3">
+        <label for="durasi" class="form-label">Durasi</label>
+        <input type="time" class="form-control" id="durasi" name="durasi">
+      </div> -->
+      <button type="submit" class="btn btn-primary float-end">Simpan</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}  

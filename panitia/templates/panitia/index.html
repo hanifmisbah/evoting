@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div>
+        <form class='d-flex' method=POST action="{% url 'cari' %}">
+            {% csrf_token %}
+            <input style="width: 25em;" name="cari" type="search" placeholder="cari agenda voting">
+            <button class="btn btn-secondary" type="submit">Cari</button>
+        </form>
+        
+        {% if cari %}
+            <h1>yang kau cari ini bukan? {{ cari }}</h1>
+        {% else %}
+            <h1>ketikkan yang kau cari!!!</h1>
+        {% endif %}
+        <!-- {% for d in data %}
+            <div class="row">
+                <div class="card mt-3 col-5">
+                    <div>
+                        {{d.waktu_akhir}}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div> -->
+
+{% endblock %}
