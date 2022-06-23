@@ -1,0 +1,14 @@
+{% extends "base2.html" %}
+{% block content %}
+
+<h1>beranda pemilih</h1>
+
+{% for d in datadetail %}
+
+<p>{{d.agenda}}</p>
+<p>{{d.agenda.waktu_awal}}</p>
+<p>{{d.agenda.termasuk}}</p>
+
+{% endfor %}
+
+{% endblock %}

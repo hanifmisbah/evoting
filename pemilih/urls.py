@@ -5,6 +5,6 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('', views.index),
+    path('<id>/', views.index),
     # path('vote/<kandidat_id>', views.vote, name='vote'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
