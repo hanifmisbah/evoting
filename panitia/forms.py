@@ -1,4 +1,5 @@
 from django.forms import ChoiceField, ModelForm, RadioSelect
+from matplotlib import style
 from .models import Kandidat, Agenda
 
 class KandidatForm(ModelForm):
@@ -6,8 +7,8 @@ class KandidatForm(ModelForm):
         ('Laki-Laki', 'Laki-Laki'),
         ('Perempuan', 'Perempuan'),
     ]
-    jk = ChoiceField(choices=jenis_kelamin, widget=RadioSelect())
 
+    jk = ChoiceField(choices=jenis_kelamin, widget=RadioSelect())
     class Meta:
         model = Kandidat
         fields = '__all__'
@@ -27,12 +28,19 @@ class KandidatForm(ModelForm):
         # self.fields['misi'].widget.attrs['class'] = 'form-control'
         
 class PemilihanForm(ModelForm):
+    status = [
+        ('aktif', 'aktif'),
+        ('tidak aktif', 'tidak aktif'),
+    ]
+
+    status = ChoiceField(choices=status, widget=RadioSelect())
 
     class Meta:
         model = Agenda
-        # fields = ['judul']
-        exclude = ['kandidat']
-    def __init__(self, *args, **kwargs):
-        super(PemilihanForm, self).__init__(*args, **kwargs)
-        self.fields['judul'].widget.attrs.update({'class' : 'form-control'})
-        self.fields['waktu'].widget.attrs.update({'class' : 'form-control'})
+        fields = '__all__'
+        # exclude = ['kandidat']
+
+    # def __init__(self, *args, **kwargs):
+        # super(PemilihanForm, self).__init__(*args, **kwargs)
+        # self.fields['status'].widget.attrs.update({'class' : 'form-control'})
+        # self.fields['waktu'].widget.attrs.update({'class' : 'form-control'})

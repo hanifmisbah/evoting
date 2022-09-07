@@ -11,6 +11,9 @@ def index(req):
         'data' : agenda,
     })
 
+def base(req):
+    return render(req, 'base1.html')
+
 def cari(req):
     if req.POST:
         cari = req.POST['cari']
@@ -29,6 +32,7 @@ def agenda(req):
     })
 
 def tambah_agenda(req):
+    form = PemilihanForm()
     if req.POST:
         agenda = models.Agenda.objects.create(
           judul = req.POST['judul'],  
@@ -36,10 +40,14 @@ def tambah_agenda(req):
           waktu_akhir = req.POST['waktu_akhir'],  
         #   durasi = req.POST['durasi'],  
         )
+        form = PemilihanForm(req.POST)
+        if form.is_valid():
+            form.save()
         return redirect('/agenda')
     pemilihan = models.Agenda.objects.all()
     return render(req, 'panitia/tambah_agenda.html', {
         'data' : pemilihan,
+        'form' : form,
     })
 
 def agenda_update(req, id):
@@ -92,7 +100,3 @@ def kandidat(req):
         'data' : kandidat,
         'form' : form,
     })
-
-def coba(req):
-    kddt = models.Kandidat.objects.all()
-    coba = models.Agenda.objects.filter(kddt='termasuk')

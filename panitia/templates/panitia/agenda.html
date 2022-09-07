@@ -1,34 +1,35 @@
-{% extends "base.html" %}
-{% block content %}
-    <h3>Agenda Voting</h3>
-    <div><a href="{% url 'tambah_agenda' %}"><button class="btn btn-primary">Tambah Agenda</button></a></div>
-    <table class="table">
-      <thead>
+{% extends "base3.html" %} {% block content %}
+<h3>Agenda Voting</h3>
+<div><a href="{% url 'tambah_agenda' %}"><button class="btn btn-primary">Tambah Agenda</button></a></div>
+<table class="table">
+    <thead>
         <tr>
-          <th scope="col">No</th>
-          <th scope="col">Judul Pemilihan</th>
-          <th scope="col">Waktu Mulai</th>
-          <th scope="col">Waktu Selesai</th>
-          <!-- <th scope="col">Durasi</th> -->
-          <th scope="col">Action</th>
+            <th scope="col">No</th>
+            <th scope="col">Judul Pemilihan</th>
+            <th scope="col">Waktu Mulai</th>
+            <th scope="col">Waktu Selesai</th>
+            <th scope="col">Status</th>
+            <!-- <th scope="col">Durasi</th> -->
+            <th scope="col">Action</th>
         </tr>
-      </thead>
-      <tbody>
-      {% for d in data %}
+    </thead>
+    <tbody>
+        {% for d in data %}
         <tr>
-          <th scope="row">{{forloop.counter}}</th>
-          <td>{{d.judul}}</td>
-          <td>{{d.waktu_awal}}</td>
-          <td>{{d.waktu_akhir}}</td>
-          <!-- <td>{{d.durasi}}</td> -->
-          <td>
-            <a class="btn btn-sm btn-success" href="{{d.id}}/update"><i class="fas fa-pen"></i></a>
-            <a class="btn btn-sm btn-danger" href="{{d.id}}/delete"><i class="fas fa-trash-alt"></i></a>
-            <!-- <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button> -->
-            <!-- <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button> -->
-          </td>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{d.judul}}</td>
+            <td>{{d.waktu_awal}}</td>
+            <td>{{d.waktu_akhir}}</td>
+            <td>{{d.status}}</td>
+            <!-- <td>{{d.durasi}}</td> -->
+            <td>
+                <a class="btn btn-sm btn-success" href="{{d.id}}/update"><i class="fas fa-pen"></i></a>
+                <a class="btn btn-sm btn-danger" href="{{d.id}}/delete"><i class="fas fa-trash-alt"></i></a>
+                <!-- <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button> -->
+                <!-- <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button> -->
+            </td>
         </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-{% endblock %}  
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,42 +1,41 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base3.html" %} {% block content %}
 
 <h3>Daftar Kandidat</h3>
 <div><a href="{% url 'kandidat' %}"><button class="btn btn-primary">Tambah Kandidat</button></a></div>
 <div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">NIM</th>
-        <th scope="col">Nama</th>
-        <th scope="col">Jenis Kelamin</th>
-        <th scope="col">Tempat, Tanggal Lahir</th>
-        <th scope="col">Agenda</th>
-        <th scope="col">Visi</th>
-        <th scope="col">Misi</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for d in data %}
-      <tr>
-        <th scope="row">{{forloop.counter}}</th>
-        <td>{{d.nim}}</td>
-        <td>{{d.nama}}</td>
-        <td>{{d.jk}}</td>
-        <td>{{d.tpt_lahir}}, {{d.tgl_lahir}}</td>
-        <td>{{d.agenda}}</td>
-        <td>{{d.visi}}</td>
-        <td>{{d.misi}}</td>
-        <td>
-          <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
-            <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">NIM</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">Tempat, Tanggal Lahir</th>
+                <th scope="col">Agenda</th>
+                <th scope="col">Visi</th>
+                <th scope="col">Misi</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in data %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{d.nim}}</td>
+                <td>{{d.nama}}</td>
+                <td>{{d.jk}}</td>
+                <td>{{d.tpt_lahir}}, {{d.tgl_lahir}}</td>
+                <td>{{d.agenda}}</td>
+                <td>{{d.visi}}</td>
+                <td>{{d.misi}}</td>
+                <td>
+                    <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 
-{% endblock %}  
+{% endblock %}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
+
+    <!-- style -->
+    <link rel="stylesheet" href="../static/css/style2.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="main-container d-flex">
+        <div class="sidebar" id="side_nav">
+            <div class="header-box">
+                <div class="row">
+                    <center>
+                        <img src="../static/img/logo.png" alt="">
+                        <span class="tittle">election</span>
+                    </center>
+                </div>
+                <div class="row">
+
+                    <ul class="list-unstyled px-5 mt-5">
+                        <li class="active menu">
+                            <a href="{% url 'panitia' %}" class="d-block">
+                                <i class='bx bxs-dashboard'></i>
+                                <span>Beranda</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu" class="dropdown-toggle aria-disabled" data-toggle="collapse" aria-disabled="true">
+                                <i class='bx bxs-book-content'></i>
+                                <span>Kelola Data</span>
+                            </a>
+                        </li>
+                        <li class="mx-4">
+                            <a href="{% url 'agenda' %}" class="d-block">Agenda Voting</a>
+                        </li>
+                        <li class="mx-4">
+                            <a href="{% url 'list_kandidat' %}" class="d-block">Kandidat</a>
+                        </li>
+                        <li class="mx-4">
+                            <a href="#" class="d-block">Data Pemilih</a>
+                        </li>
+                        <li class="menu">
+                            <a href="#" class="d-block">
+                                <i class='bx bxs-report'></i>
+                                <span>Laporan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <nav class="navbar navbar-light justify-content-end">
+                <div class="dropdown ">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class='bx bxs-user-circle'></i></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Keluar</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="main-content">
+                <div class="items-content">
+                    {% block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- script -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a03bf04fac.js" crossorigin="anonymous"></script>
+</body>
+<script>
+    $(".sidebar li").on('click', function() {
+        $(".sidebar li.active").removeClass('active');
+        $(this).addClass('active');
+    });
+    $(".open-btn").on('click', function() {
+        $(".sidebar").addClass('active')
+    });
+    $(".open-btn").on('click', function() {
+        $(".sidebar").removeClass('active')
+    });
+</script>
+
+</html>
