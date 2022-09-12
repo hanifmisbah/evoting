@@ -100,3 +100,7 @@ def kandidat(req):
         'data' : kandidat,
         'form' : form,
     })
+def kandidat_delete(req, id):
+    hapus = models.Kandidat.objects.filter(pk=id).delete()
+    # messages.info(req, f'{hapus.judul} berhasil dihapus')
+    return redirect('/kandidat')

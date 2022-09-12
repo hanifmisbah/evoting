@@ -40,7 +40,7 @@ class Kandidat(models.Model):
     email = models.EmailField()
     visi = models.TextField(blank=False)
     misi = models.TextField(blank=False)
-    agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE, related_name='termasuk', blank=True, null=True)
+    agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE, related_name='agenda', blank=True, null=True)
 
     def __str__(self):
         return self.nama

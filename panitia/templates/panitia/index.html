@@ -1,6 +1,9 @@
 {% extends "base3.html" %} {% block content %}
 
-<div>
+<div class="row mt-3">
+    <h4>Beranda</h4>
+</div>
+<div class="row">
     <form class='d-flex' method=POST action="{% url 'cari' %}">
         {% csrf_token %}
         <input style="width: 25em;" name="cari" type="search" placeholder="cari agenda voting">
@@ -12,15 +15,6 @@
     {% else %}
     <h1>ketikkan yang kau cari!!!</h1>
     {% endif %}
-    <!-- {% for d in data %}
-            <div class="row">
-                <div class="card mt-3 col-5">
-                    <div>
-                        {{d.waktu_akhir}}
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div> -->
+</div>
 
-    {% endblock %}
+{% endblock %}

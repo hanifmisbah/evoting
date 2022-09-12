@@ -1,9 +1,25 @@
-{% extends "base2.html" %} {% block content %}
+{% extends "base4.html" %}
+{% block content %}
 
-<h1>beranda pemilih</h1>
 {% for d in data %}
-<p>{{d.judul}}</p>
-<p>{{d.waktu_awal}}</p>
-<p>{{d.waktu_akhir}}</p>
-<p>{{d.status}}</p>
-<a href="{{d.id}}/vote"><button type="button" class="btn btn-primary">Mulai Vote</button></a> {% endfor %} {% endblock %}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <h6>{{d.judul}}</h6>
+                </div>
+                <div class="col-4">
+                    <h6>{{d.status}}</h6>
+                </div>
+                <div class="col-4">
+                    <a href="{{d.id}}/data"><button type="button" class="btn btn-primary">Mulai Vote</button></a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endfor %} 
+{% endblock %}

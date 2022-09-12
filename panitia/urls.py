@@ -14,4 +14,5 @@ urlpatterns = [
     path('tambah_agenda/', views.tambah_agenda, name='tambah_agenda'),
     path('list_kandidat/', views.list_kandidat, name='list_kandidat'),
     path('kandidat/', views.kandidat, name='kandidat'),
+    path('kandidat/<id>/delete', views.kandidat_delete, name='delete_kandidat'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

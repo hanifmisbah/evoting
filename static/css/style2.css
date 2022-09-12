@@ -54,6 +54,7 @@ ul li a {
 
 .items-content {
     margin-left: 35px;
+    margin-right: 35px;
 }
 
 @media(max-width: 425px) {

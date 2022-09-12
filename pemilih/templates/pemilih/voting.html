@@ -1,4 +1,18 @@
-{% extends "base2.html" %} {% block content %} {% for r in data %}
-<h3>{{r.nama}}</h3>
-<h3>{{r.jurusan}}</h3>
-{% endfor %} {% endblock %}
+{% extends "base2.html" %}
+
+{% block content %}
+  <!-- <div class="container mt-3"> -->
+    <h1>Vote</h1>
+
+
+    <div class="card">
+        {% for d in data %}
+        <div class="card-body">
+            <h3>{{d.nama}}</h3>
+            <span>{{d.jurusan}}</span>
+            <a href="/pemilih/vote/{{d.id}}"><button type="button" class="btn btn-success">Vote</button></a>
+        </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
