@@ -1,16 +1,21 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils.http import urlencode
+
+# from .encrypt import encryptData, decryptData
 
 from panitia import models as panitiamodels
 from .models import Vote
 
 # Create your views here.
-
+# @login_required(login_url='/account/login')
 def index(req):
-    a = panitiamodels.Agenda.objects.filter(status='aktif').values()
+    agenda = panitiamodels.Agenda.objects.filter(status='aktif').values()
     return render(req, 'pemilih/index.html', {
-        'data' : a,
+        'data' : agenda,
     })
-    
+
 def showdatakandidat(req, id):
     if req.method == 'GET':
         showdetail= panitiamodels.Agenda.objects.filter(pk=id).first()
@@ -18,16 +23,14 @@ def showdatakandidat(req, id):
         
         return render(req, 'pemilih/voting.html', {
             'data' : detailbyid,
+            # 'detail' : showdetail,
         })
 
 def vote(req, id):
-    vote = panitiamodels.Kandidat.objects.get(pk=id)
-    Vote.objects.create(
-        kandidat=vote
-        )
-    
+    get_kandidat = panitiamodels.Kandidat.objects.get(pk=id)
+    vote = Vote.objects.create(kandidat=get_kandidat)
+    print(vote)
+    messages.success(req, f'Vote Berhasil')
     return redirect('/pemilih')
-    # messages.info(request, f'yeeeeeeeeeeeeha, hakdes hakdeds | Vote Berhasil | uhuyyyyy josss')
-    
     
     

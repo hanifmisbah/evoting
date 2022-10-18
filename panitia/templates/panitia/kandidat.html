@@ -1,72 +1,76 @@
 {% extends "base3.html" %} {% block content %}
-<div class="row">
-    <div class="col-7">
-        <h5>Kandidat</h5>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="nama" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="nama" name="nama" aria-describedby="emailHelp">
+
+<div class="row row-responsive">
+    <h5>Kandidat</h5>
+    <form method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <!-- {{form.media}} -->
+        <div class="row mb-4">
+            <div class="col-2">
+                <!-- {{form.foto}} -->
             </div>
-            <label for="jenis_kelamin">Jenis Kelamin</label>
-            <div class="mb-3" id="jenis_kelamin">
-                {{form.jk}}
-                <!-- <div class="row">
-          <div class="col-3 form-check">
-            <input class="form-check-input" type="radio" name="jk" value="Laki-Laki" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-              Laki-Laki
-            </label>
-          </div>
-          <div class="col-6 form-check">
-            <input class="form-check-input" type="radio" name="jk" value="Perempuan" id="flexRadioDefault2" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Perempuan
-            </label>
-          </div>
-        </div> -->
-            </div>
-            <div class="mb-3">
-                {{form.jurusan.label}} {{form.jurusan}}
-            </div>
-            <div class="mb-3">
-                <label for="nim" class="form-label">NIM</label>
-                <input type="number" class="form-control" id="nim" name="nim">
-            </div>
-            <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama Lengkap Kandidat</label>
+                    {{form.nama}}
+                </div>
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+                <div class="mb-3" id="jenis_kelamin">
+                    {{form.jk}}
+                </div>
                 <div class="mb-3 col-5">
                     <label for="text" class="form-label">Tempat Lahir</label>
-                    <input type="text" class="form-control" id="text" name="tpt_lahir">
+                    {{form.tpt_lahir}}
                 </div>
                 <div class="mb-3 col-7">
                     <label for="date" class="form-label">Tanggal Lahir</label>
-                    <input type="date" class="form-control" id="date" name="tgl_lahir">
+                    {{form.tgl_lahir}}
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="text" class="form-label">Nomor WA</label>
-                <input type="number" class="form-control" id="text" name="no_wa">
-            </div>
-            <div class="mb-3">
-                <label for="text" class="form-label">Email</label>
-                <input type="email" class="form-control" id="text" name="email">
-            </div>
-            <div class="mb-3">
-                {{form.agenda.label}} {{form.agenda}}
-            </div>
-            <div class="row mt-3">
-                <div class="form-floating mb-3 col-6">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="visi"></textarea>
-                    <label for="floatingTextarea">Visi</label>
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="nim" class="form-label">NIM</label>
+                    {{form.nim}}
                 </div>
-                <div class="form-floating mb-3 col-6">
-                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="misi"></textarea>
-                    <label for="floatingTextarea">Misi</label>
+                <div class="mb-3">
+                    <label for="nim" class="form-label">Domisili</label>
+                    {{form.domisili}}
+                </div>
+                <div class="row">
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Nomor WA</label>
+                    {{form.no_wa}}
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Email</label>
+                    {{form.email}}
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Agenda</label>
+                    {{form.agenda}}
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary float-end">Simpan</button>
-        </form>
-    </div>
+        </div>
+        <div class="row row-responsive justify-content-center mt-3">
+            <div class="form-floating mb-3">
+                <!-- <label  for="text" class="form-label">Visi</label> -->
+                {{form.visi}}
+            </div>
+            <div class="form-floating mb-3">
+                <!-- <label for="text" class="form-label">Misi</label> -->
+                {{form.misi}}
+            </div>
+            <!-- <input type="text" value="{{request.session.jurusan}}"> -->
+        </div>
+        <div class="row mt-3">
+            <div class="form-floating mb-3 col-10">
+                <button type="submit" class="btn float-end" style="margin-left: 25px; font-weight: bold; background-color: #37BFA4; color: #ffffff;">Simpan</button>
+                <a href="{% url 'list_kandidat' %}"><button class="btn float-end" style="font-weight: bold; background-color: #FF4747; color: #ffffff;">Batal</button></a>
+            </div>
+        </div>
+    </form>
 </div>
-
 {% endblock %}

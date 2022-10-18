@@ -1,18 +1,46 @@
 {% extends "base2.html" %}
-
+{% block title %}Vote{% endblock %}
 {% block content %}
-  <!-- <div class="container mt-3"> -->
-    <h1>Vote</h1>
-
-
-    <div class="card">
+<a href="{% url 'index' %}"><h5><i class='bx bx-left-arrow-alt'>Kembali</i></h5></a>
+<h1>Vote</h1>
+<hr>
+<div style="background-color: #ffffff;">
+    <!-- <h5 class="text-capitalize">{{detail}}</h5> -->
+    <div class="row">
         {% for d in data %}
-        <div class="card-body">
-            <h3>{{d.nama}}</h3>
-            <span>{{d.jurusan}}</span>
-            <a href="/pemilih/vote/{{d.id}}"><button type="button" class="btn btn-success">Vote</button></a>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/2048px-OOjs_UI_icon_userAvatar.svg.png" alt="" style="filter: brightness(1) invert(0);; height:100px; width:100px;">
+                        <h5 class="align-middle text-capitalize">{{d.nama}}</h5>
+                        <p class="align-middle">{{d.nim}}</p>
+                        <button class="btn float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="font-weight: bold; background-color: #FF4747; color: #ffffff;">Vote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog rounded-3">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #0E5E4E;">
+                        <h5 class="modal-title" id="staticBackdropLabel" style="color: #ffffff;">Pernyataan</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="color: #ffffff;"></button>
+                    </div>
+                    <div class="modal-body">
+                        Apa Anda yakin ?
+                    </div>
+                        <div class="modal-footer">
+                        <a href="/pemilih/vote/{{d.id}}"><button type="button" class="btn" style="color: #ffffff; background-color: #37BFA4;"> Ya </button></a>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Tidak </button>
+                    </div>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>
     
+</div>
 {% endblock %}

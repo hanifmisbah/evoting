@@ -7,3 +7,6 @@ class Vote(models.Model):
 
     def __str__(self):
         return self.kandidat.nama
+    
+    def encode(self):
+        return self.encode

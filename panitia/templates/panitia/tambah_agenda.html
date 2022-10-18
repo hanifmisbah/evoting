@@ -7,26 +7,30 @@
 
             <div class="mb-3">
                 <label for="judul" class="form-label">Judul Agenda</label>
-                <input type="text" class="form-control" id="judul" name="judul" aria-describedby="emailHelp" placeholder='Masukkan Judul'>
+                <!-- <input type="text" class="form-control" id="judul" name="judul" aria-describedby="emailHelp" placeholder='Masukkan Judul'> -->
+                {{form.judul}}
             </div>
-            <div class="mb-3">
+            <div class="mb-3" style="width: 250px;">
                 <label for="waktu_awal" class="form-label">Waktu Mulai</label>
-                <input type="datetime-local" class="form-control" id="waktu_awal" name="waktu_awal" required pattern="\d{4}-\d{2}-\d{2}">
+                <!-- <input type="datetime-local" class="form-control" id="waktu_awal" name="waktu_awal" required pattern="\d{4}-\d{2}-\d{2}"> -->
+                {{form.waktu_awal}}
             </div>
-            <div class="mb-3">
+            <div class="mb-3" style="width: 250px;">
                 <label for="waktu_akhir" class="form-label">Waktu Selesai</label>
-                <input type="datetime-local" class="form-control" id="waktu_akhir" name="waktu_akhir">
+                <!-- <input type="datetime-local" class="form-control" id="waktu_akhir" name="waktu_akhir"> -->
+                {{form.waktu_akhir}}
             </div>
             <!-- <div class="mb-3">
         <label for="durasi" class="form-label">Durasi</label>
         <input type="time" class="form-control" id="durasi" name="durasi">
       </div> -->
-            <label for="status">Status</label>
-            <div class="mb-3" id='status'>
+            <div class="mb-3" style="width: 220px;" id='status'>
+                <label for="status">Status</label>
                 {{form.status}}
             </div>
-            <button type="submit" class="btn btn-primary float-end">Simpan</button>
+            <button type="submit" style="margin-left: 25px; font-weight: bold; background-color: #37BFA4; color: #ffffff;" class="btn float-end">Simpan</button>
         </form>
+        <a href="{% url 'agenda' %}"><button class="btn float-end" style="font-weight: bold; background-color: #FF4747; color: #ffffff;">Batal</button></a>
     </div>
 </div>
 

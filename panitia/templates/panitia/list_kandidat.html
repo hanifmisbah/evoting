@@ -1,41 +1,38 @@
-{% extends "base3.html" %} {% block content %}
+{% extends "base3.html" %}
+{% block title %}Kandidat{% endblock %}
+{% block content %}
 
-<h3>Daftar Kandidat</h3>
-<div><a href="{% url 'kandidat' %}"><button class="btn btn-primary">Tambah Kandidat</button></a></div>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">NIM</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Jenis Kelamin</th>
-                <th scope="col">Tempat, Tanggal Lahir</th>
-                <th scope="col">Agenda</th>
-                <th scope="col">Visi</th>
-                <th scope="col">Misi</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for d in data %}
-            <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{d.nim}}</td>
-                <td>{{d.nama}}</td>
-                <td>{{d.jk}}</td>
-                <td>{{d.tpt_lahir}}, {{d.tgl_lahir}}</td>
-                <td>{{d.agenda}}</td>
-                <td>{{d.visi}}</td>
-                <td>{{d.misi}}</td>
-                <td>
-                    <button class="btn btn-primary"><i class="fa-solid fa-eye"></i></button>
-                    <a href="/kandidat/{{d.id}}/delete"><button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+<h3>Kandidat</h3>
+    <div class='mt-2 mb-2'><a href="{% url 'kandidat' %}"><button class="btn" style="font-weight: bold; background-color: #37BFA4; color: #ffffff;">Tambah</button></a></div>
+    <div class="overflow-auto">
+        <table class="table table-responsive table-striped table-sm" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+            <thead style="border-top-left-radius: 10px; border-top-right-radius: 10px">
+                <tr style="border-top-left-radius: 10px; border-top-right-radius: 10px">
+                    <th scope="col" style="border-top-left-radius: 10px;">No</th>
+                    <th scope="col">NIM</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Agenda</th>
+                    <th scope="col">Tanggal Pelaksanaan</th>
+                    <th scope="col" style="border-top-right-radius: 10px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                <tr>
+                    <th class="align-middle" scope="row" style="border-bottom-left-radius: 10px;">{{forloop.counter}}</th>
+                    <td class="align-middle">{{d.nim}}</td>
+                    <td class="align-middle text-capitalize">{{d.nama}}</td>
+                    <td class="align-middle text-capitalize">{{d.agenda}}</td>
+                    <td class="align-middle text-capitalize">{{d.agenda.waktu_awal|date:'d b Y'}}</td>
+                    <td class="align-middle">
+                        <a class="btn btn-sm" href="#"><i class="fa-solid fa-eye"></i></a>
+                        <a class="btn btn-sm" href="/panitia/kandidat/{{d.id}}/update"><i class="fas fa-pen"></i></a>
+                        <a class="btn btn-sm" href="/panitia/kandidat/{{d.id}}/delete"><i class="fa-solid fa-trash"></i></a>
+                    </td style="border-bottom-right-radius: 10px;">
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}
