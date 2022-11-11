@@ -1,4 +1,5 @@
-{% extends "base3.html" %} {% block content %}
+{% extends "base3.html" %}
+{% block content %}
 
 <div class="row mt-3">
     <h4>Beranda</h4>
@@ -10,5 +11,39 @@
         <input style="width: 25em;" name="cari" type="search" placeholder="cari agenda voting">
         <button class="btn btn-secondary" type="submit">Cari</button>
     </form>
+</div>
 
+<div class="accordion mt-5" id="accordionExample1">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button text-capitalize" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <!-- {{kandidat.agenda}} -->
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse text-capitalize collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+                    <!-- {% for kandidat in kandidat %} -->
+                    <div class="accordion-body">
+                        <!-- {{kandidat.nama}} -->
+                    </div>
+                    <!-- {% endfor %} -->
+                </div>
+            </div>
+        </div>
+        
+<!-- <div class="accordion mt-5" id="accordionExample1">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button text-capitalize" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                {{kandidat.agenda}}
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse text-capitalize collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+                    {% for kandidat in kandidat %}
+                    <div class="accordion-body">
+                        {{kandidat.nama}}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div> -->
 {% endblock %}

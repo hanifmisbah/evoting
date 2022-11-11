@@ -1,3 +1,4 @@
+from concurrent.futures import process
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -28,9 +29,21 @@ def showdatakandidat(req, id):
 
 def vote(req, id):
     get_kandidat = panitiamodels.Kandidat.objects.get(pk=id)
-    vote = Vote.objects.create(kandidat=get_kandidat)
-    print(vote)
+    vote_id = Vote.objects.create(kandidat=get_kandidat)
+    if vote_id:
+        vote_id.kandidat.vote += 1
+        # print(result)
     messages.success(req, f'Vote Berhasil')
     return redirect('/pemilih')
     
-    
+# def vote(req, id):
+#     agenda = panitiamodels.Agenda.objects.get(pk=id)
+#     kandidat = agenda.agenda.all()
+#     if req.POST:
+#         voting = req.POST['choice']
+#         process_vote = kandidat.objects.get(id=vote)
+#         process_vote.vote += 1
+#         process_vote.save()
+        
+#         messages.success(req, f'Vote Berhasil')
+#         return redirect('/pemilih')

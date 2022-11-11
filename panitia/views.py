@@ -1,27 +1,41 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
 
 from pemilih.views import vote
 
-from . import models
+from panitia.models import *
 from pemilih.models import Vote 
 from account.models import User 
 from .forms import KandidatForm, PemilihanForm
 
 # Create your views here.
 def index(req):
-    return render(req, 'panitia/index.html')
+    today = datetime.now().date()
+    kandidat = Kandidat.objects.all().order_by('-id')
+    agenda = Agenda.objects.first()
+    kandidat_byagenda = agenda.agenda.all()
+
+    print(kandidat_byagenda)
+
+    return render(req, 'panitia/index.html', {
+        'kandidat' : kandidat,
+        'agenda' : agenda,
+        'kandidats' : kandidat_byagenda,
+    })
     
 def agendafilter(req):
-    agenda = models.Agenda.objects.filter(status='aktif').values()
+    agenda = Agenda.objects.filter(status='aktif').values()
     
     return render(req, 'panitia/agendafilter.html', {
         'agenda':agenda,
+        # 'data' : detailbyid,
     })
 def kandidatfilter(req, id):
     if req.method == 'GET':
-        showdetail= models.Agenda.objects.filter(pk=id).first()
+        showdetail= Agenda.objects.filter(pk=id).first()
         detailbyid = showdetail.agenda.all()
         print(showdetail)
         print(detailbyid)
@@ -29,7 +43,7 @@ def kandidatfilter(req, id):
         'data' : detailbyid,
     })
 
-@login_required(login_url='/account/login')
+# @login_required(login_url='/account/login')
 def cari(req):
     if req.POST:
         cari = req.POST['cari']
@@ -43,7 +57,7 @@ def cari(req):
 
 # @login_required(login_url='/account/login')
 def agenda(req):
-    agenda_vote = models.Agenda.objects.order_by('-id')
+    agenda_vote = Agenda.objects.order_by('-id')
     return render(req, 'panitia/agenda.html', {
         'data' : agenda_vote,
     })
@@ -57,7 +71,7 @@ def tambah_agenda(req):
             form.save()
             print(form)
         return redirect('agenda')
-    pemilihan = models.Agenda.objects.all()
+    pemilihan = Agenda.objects.all()
     return render(req, 'panitia/tambah_agenda.html', {
         'data' : pemilihan,
         'form' : form,
@@ -66,7 +80,7 @@ def tambah_agenda(req):
 # @login_required(login_url='/account/login')
 def agenda_update(req, id):
     form = PemilihanForm()
-    agenda = models.Agenda.objects.get(pk=id)
+    agenda = Agenda.objects.get(pk=id)
     form = PemilihanForm(instance=agenda)
     
     if req.POST:
@@ -81,7 +95,7 @@ def agenda_update(req, id):
 
 # @login_required(login_url='/account/login')
 def agenda_delete(req, id):
-    hapus = models.Agenda.objects.filter(pk=id).delete()
+    hapus = Agenda.objects.filter(pk=id).delete()
     # messages.info(req, f'{hapus.judul} berhasil dihapus')
     return redirect('/agenda')
 
@@ -89,7 +103,7 @@ def agenda_delete(req, id):
 
 # @login_required(login_url='/account/login')
 def list_kandidat(req):
-    kandidat = models.Kandidat.objects.order_by('-id')
+    kandidat = Kandidat.objects.order_by('-id')
     return render(req, 'panitia/list_kandidat.html', {
         'data' : kandidat,
     })
@@ -109,7 +123,7 @@ def kandidat(req):
 # @login_required(login_url='/account/login')
 def kandidat_update(req, id):
     form = KandidatForm()
-    kandidat = models.Kandidat.objects.get(pk=id)
+    kandidat = Kandidat.objects.get(pk=id)
     form = KandidatForm(instance=kandidat)
     
     if req.POST:
@@ -124,6 +138,6 @@ def kandidat_update(req, id):
     
 # @login_required(login_url='/account/login')
 def kandidat_delete(req, id):
-    hapus = models.Kandidat.objects.filter(pk=id).delete()
+    hapus = Kandidat.objects.filter(pk=id).delete()
     # messages.info(req, f'{hapus.judul} berhasil dihapus')
     return redirect('/list_kandidat')

@@ -1,4 +1,5 @@
 from distutils.command.install_egg_info import to_filename
+from email.policy import default
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -59,7 +60,10 @@ class Kandidat(models.Model):
     visi = RichTextField(blank=True, null=True)
     misi = RichTextField(blank=True, null=True)
     agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE, related_name='agenda',blank=True, null=True)
+    # vote = models.PositiveBigIntegerField(default=0, max_length=100)
 
     def __str__(self):
         return self.nama
 
+    def result(self):
+        return self.vote + 1

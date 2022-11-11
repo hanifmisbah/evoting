@@ -1,0 +1,66 @@
+{% extends "base4.html" %}
+{% block title %}Agenda{% endblock %}
+{% block content %}
+<h3>Agenda Voting</h3>
+<div class='mt-2 mb-2 hover-shadow'><a href="/superadmin/tambah-agenda"><button class="btn" style="font-weight: bold; background-color: #37BFA4; color: #ffffff;">Tambah</button></a></div>
+<div class="overflow-auto">
+    <table class="table table-responsive table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col" style="border-top-left-radius: 10px;">No</th>
+                <th scope="col">Nama Agenda Pemilihan</th>
+                <th scope="col">Tanggal Pelaksanaan</th>
+                <!-- <th scope="col">Tanggal Selesai</th> -->
+                <th scope="col">Status</th>
+                <!-- <th scope="col">Durasi</th> -->
+                <th scope="col" style="border-top-right-radius: 10px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in data %}
+            <tr >
+                <th scope="row" class="align-middle" style="border-bottom-left-radius: 10px;">{{forloop.counter}}</th>
+                <td class="align-middle text-capitalize">{{d.judul}}</td>
+                <td class="align-middle text-capitalize">{{d.waktu_awal|date:'d b Y'}}</td>
+                <td class="align-middle text-capitalize">{{d.status}}</td>
+                <td class="align-middle" style="border-bottom-right-radius: 10px;">
+                    <a class="btn btn-sm" href="" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-eye"></i></a>
+                    <a class="btn btn-sm" href="{{d.id}}/update"><i class="fas fa-pen"></i></a>
+                    <a class="btn btn-sm" href="{{d.id}}/delete"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color: #0E5D4E; color: #ffffff;">
+                    <h5 class="modal-title" style="justify-items: center;" id="exampleModalLabel">Informasi Agenda</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="row">
+                          <span class="text-capitalize">Judul: {{d.judul}}</span>
+                          <span class="text-capitalize">Tanggal: {{d.waktu_awal|date:'d b Y'}}</span>
+                          <span class="text-capitalize">Waktu: {{d.waktu_awal|date:'H:m'}} - {{d.waktu_akhir|date:'H:m'}}</span>
+                      </div>
+                      <div class="row mt-2">
+                        <hr>
+                        {% for k in d.kandidat %}
+                        <div class="col">
+                          <img src="" alt="" style="height: 10px; width: 10px">
+                          <span>{{k}}</span>
+                        </div>
+                        {% endfor %}
+                      </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

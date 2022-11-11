@@ -31,7 +31,10 @@
 
 <div class="panel">
   <!-- <p>{% include 'panitia/kandidatfilter.html' with agenda=agenda %}</p> -->
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex optio dolores animi nihil illo cumque quia soluta accusantium, beatae ducimus quis veritatis eius nemo. Quo dolorum eos sapiente officiis ullam!</p>
+  {% for kandidat in agenda.data %}
+    <h6>{{kandidat.nama}}</h6>
+  {% endfor %}
+  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex optio dolores animi nihil illo cumque quia soluta accusantium, beatae ducimus quis veritatis eius nemo. Quo dolorum eos sapiente officiis ullam!</p>
 </div>
 {% endfor %}
 

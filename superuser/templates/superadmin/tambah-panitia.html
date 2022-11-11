@@ -1,0 +1,35 @@
+{% extends "base4.html" %}
+{% block content %}
+
+<div class="row">
+    <h5>Tambah Panitia</h5>
+    <div class="col-7">
+
+        <form method="POST">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Jurusan</label>
+                {{form.jurusan}}
+                <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp"> -->
+        </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password1" class="form-control" id="exampleInputPassword1" nama="password">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Konfirmasi Password</label>
+            <input type="password2" class="form-control" id="exampleInputPassword1" nama="password">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="is_panitia" value="panitia">
+            <!-- <label class="form-check-label" for="exampleCheck1">Check me out</label> -->
+        </div>
+        <button type="submit" class="btn btn-primary float-end">Submit</button>
+    </form>
+</div>
+    
+</div>
+{% endblock %}

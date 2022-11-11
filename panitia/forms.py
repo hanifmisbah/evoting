@@ -17,8 +17,9 @@ class KandidatForm(forms.ModelForm):
             'no_wa': forms.NumberInput(attrs={'style': 'border-color:#1AB394; border-radius:10px;'}),
             'email': forms.EmailInput(attrs={'style': 'border-color:#1AB394; border-radius:10px;'}),
             'agenda': forms.Select(attrs={'style': 'border-color:#1AB394; border-radius:10px;'}),
-            # 'visi': forms.Textarea(attrs={'style': 'height:150px; border-color:#1AB394; border-radius:10px;'}),
-            # 'misi': forms.Textarea(attrs={'style': 'height:150px; border-color:#1AB394; border-radius:10px;'}),
+            'visi': forms.Textarea(attrs={'style': 'height:150px; border-color:#1AB394; border-radius:10px;'}),
+            'misi': forms.Textarea(attrs={'style': 'height:150px; border-color:#1AB394; border-radius:10px;'}),
+            # 'vote': forms.NumberInput(attrs={'style': 'border-color:#1AB394; border-radius:10px;'}),
         }
         
     def __init__(self, *args, **kwargs):

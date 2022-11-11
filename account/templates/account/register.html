@@ -13,7 +13,9 @@
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #7abecc !important;
+			background:url('../static/img/unu.jpg') no-repeat;
+			background-size: cover !important;
+			/* background: #7abecc !important; */
 		}
 		.user_card {
 			width: 350px;
@@ -35,13 +37,30 @@
 		.form_container {
 			margin-top: 20px;
 		}
-
-		#form-title{
+		a{
 			color: #fff;
+		}
+		a:hover{
+			color:black;
+		}
+		#form-title{
+			color: rgb(14, 202, 139);
+			
+		}
+		#form-input{		
+			background-color: rgb(209, 209, 209);
+			border: 0.5 !important;
+			border-color: aqua;
+			/* color: #fff; */
 		}
 		.login_btn {
 			width: 100%;
 			background: #33ccff !important;
+			color: white !important;
+		}
+		.login_btn:hover {
+			width: 100%;
+			background: #1189b1 !important;
 			color: white !important;
 		}
 		.login_btn:focus {
@@ -71,18 +90,12 @@
         <div class="d-flex justify-content-center h-100">
             <div class="user_card">
 				<div class="d-flex justify-content-center">
-					<h3 id="form-title">REGISTER ACCOUNT</h3>
+					<h3 id="form-title">DAFTAR AKUN</h3>
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
 					<form method="POST" action="">
                         {% csrf_token %}
-                        <!-- <div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							{{form.group}}
-						</div> -->
                         <div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -127,14 +140,14 @@
 						</div>
 
 				   		<div class="d-flex justify-content-center mt-3 login_container">
-				 			<input class="btn login_btn" type="submit" value="Register Account">
+				 			<input class="btn login_btn" type="submit" value="Daftar akun">
 				   		</div>
 					</form>
 				</div>
 				{{form.error}}
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
-						Already have an account? <a href="/" class="ml-2">Login</a>
+						Sudah punya akun? <a href="/" class="ml-2">Masuk</a>
 					</div>
 				</div>
 			</div>

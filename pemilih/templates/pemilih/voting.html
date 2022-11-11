@@ -4,6 +4,8 @@
 <a href="{% url 'index' %}"><h5><i class='bx bx-left-arrow-alt'>Kembali</i></h5></a>
 <h1>Vote</h1>
 <hr>
+<form action="" method="POST">
+    {% csrf_token %}
 <div style="background-color: #ffffff;">
     <!-- <h5 class="text-capitalize">{{detail}}</h5> -->
     <div class="row">
@@ -15,12 +17,13 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/2048px-OOjs_UI_icon_userAvatar.svg.png" alt="" style="filter: brightness(1) invert(0);; height:100px; width:100px;">
                         <h5 class="align-middle text-capitalize">{{d.nama}}</h5>
                         <p class="align-middle">{{d.nim}}</p>
+                        <input type="radio" value="choice" name="{{d.id}}">
                         <button class="btn float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="font-weight: bold; background-color: #FF4747; color: #ffffff;">Vote</button>
                     </div>
                 </div>
             </div>
         </div>
-
+        <button type="submit">Pilih</button>
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog rounded-3">
@@ -33,14 +36,14 @@
                         Apa Anda yakin ?
                     </div>
                         <div class="modal-footer">
-                        <a href="/pemilih/vote/{{d.id}}"><button type="button" class="btn" style="color: #ffffff; background-color: #37BFA4;"> Ya </button></a>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Tidak </button>
+                            <a href="/pemilih/vote/{{d.id}}"><button type="button" class="btn" name="choice" style="color: #ffffff; background-color: #37BFA4;"> Ya </button></a>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Tidak </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        </div>        
     </div>
-    
-</div>
+</form>
 {% endblock %}

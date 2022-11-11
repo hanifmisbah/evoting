@@ -42,9 +42,10 @@ def loginPage(req):
                 login(req, user)
                 return redirect('/pemilih')
             else:
-                form = LoginForm()
+                return redirect('/')
+                # form = LoginForm()
         else:
-            form = LoginForm()
+            return redirect('/')
     return render(req, 'account/login.html', {
         'form': form,
         'msg':msg,
@@ -63,6 +64,28 @@ def logoutPage(req):
     #     from django.contrib.auth.models import AnonymousUser
     #     req.user = AnonymousUser()
 
+def loginPageAdmin(req):
+    form = LoginForm(req.POST)
+    msg = None
+    if req.POST:
+        if form.is_valid():
+            username=('admin1', 'admin2')
+            # password=form.cleaned_data.get('password')
+            user = authenticate(username=username, password='adminku123')
+            
+            if user:
+                login(req, user)
+                return redirect('/superadmin')
+            else:
+                return redirect('/superadmin')
+                # form = LoginForm()
+        else:
+            return redirect('/superadmi')
+    return render(req, 'account/loginAdmin.html', {
+        'form': form,
+        'msg':msg,
+    })
+    
 
 # ====================================
 

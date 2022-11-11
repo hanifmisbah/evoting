@@ -1,0 +1,78 @@
+{% extends "base4.html" %}
+{% block content %}
+
+<div class="row row-responsive">
+    <h5>Kandidat</h5>
+    <form method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{form.media}}
+        <!-- {{form.media}} -->
+        <div class="row mb-4">
+            <div class="col-2">
+                <!-- {{form.foto}} -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="nama" class="form-label">Nama Lengkap Kandidat</label>
+                    {{form.nama}}
+                </div>
+                <label for="jenis_kelamin">Jenis Kelamin</label>
+                <div class="mb-3" id="jenis_kelamin">
+                    {{form.jk}}
+                </div>
+                <div class="mb-3 col-5">
+                    <label for="text" class="form-label">Tempat Lahir</label>
+                    {{form.tpt_lahir}}
+                </div>
+                <div class="mb-3 col-7">
+                    <label for="date" class="form-label">Tanggal Lahir</label>
+                    {{form.tgl_lahir}}
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="mb-3">
+                    <label for="nim" class="form-label">NIM</label>
+                    {{form.nim}}
+                </div>
+                <div class="mb-3">
+                    <label for="nim" class="form-label">Domisili</label>
+                    {{form.domisili}}
+                </div>
+                <div class="row">
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Nomor WA</label>
+                    {{form.no_wa}}
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Email</label>
+                    {{form.email}}
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Agenda</label>
+                    {{form.agenda}}
+                </div>
+            </div>
+        </div>
+        <div class="row row-responsive justify-content-center mt-3">
+            <label  for="text" class="form-label">Visi</label>
+            <div class="form-floating mb-3">
+                {{form.visi}}
+            </div>
+            <label for="text" class="form-label">Misi</label>
+            <div class="form-floating mb-3">
+                {{form.misi}}
+            </div>
+        </div>
+        {{form.vote}}
+        <div class="row mt-3">
+            <div class="form-floating mb-3 col-10">
+                <button type="submit" class="btn float-end" style="margin-left: 25px; font-weight: bold; background-color: #37BFA4; color: #ffffff;">Simpan</button>
+                <a href="{% url 'list_kandidat' %}"><button class="btn float-end" style="font-weight: bold; background-color: #FF4747; color: #ffffff;">Batal</button></a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

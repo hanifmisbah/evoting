@@ -4,6 +4,7 @@
     <h5>Kandidat</h5>
     <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
+        {{form.media}}
         <!-- {{form.media}} -->
         <div class="row mb-4">
             <div class="col-2">
@@ -55,16 +56,16 @@
             </div>
         </div>
         <div class="row row-responsive justify-content-center mt-3">
+            <label  for="text" class="form-label">Visi</label>
             <div class="form-floating mb-3">
-                <!-- <label  for="text" class="form-label">Visi</label> -->
                 {{form.visi}}
             </div>
+            <label for="text" class="form-label">Misi</label>
             <div class="form-floating mb-3">
-                <!-- <label for="text" class="form-label">Misi</label> -->
                 {{form.misi}}
             </div>
-            <!-- <input type="text" value="{{request.session.jurusan}}"> -->
         </div>
+        {{form.vote}}
         <div class="row mt-3">
             <div class="form-floating mb-3 col-10">
                 <button type="submit" class="btn float-end" style="margin-left: 25px; font-weight: bold; background-color: #37BFA4; color: #ffffff;">Simpan</button>

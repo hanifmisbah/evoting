@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'panitia',
     'pemilih',
     'ckeditor',
-    # 'django_forms_bootstrap',
+    'superuser',
 ]
 
 MIDDLEWARE = [
