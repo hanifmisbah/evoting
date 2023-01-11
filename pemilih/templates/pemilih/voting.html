@@ -2,48 +2,58 @@
 {% block title %}Vote{% endblock %}
 {% block content %}
 <a href="{% url 'index' %}"><h5><i class='bx bx-left-arrow-alt'>Kembali</i></h5></a>
-<h1>Vote</h1>
-<hr>
-<form action="" method="POST">
+<h3>Vote</h3>
+<hr><br>
+
+<!-- <form action="" method="POST"> -->
     {% csrf_token %}
-<div style="background-color: #ffffff;">
-    <!-- <h5 class="text-capitalize">{{detail}}</h5> -->
-    <div class="row">
-        {% for d in data %}
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/2048px-OOjs_UI_icon_userAvatar.svg.png" alt="" style="filter: brightness(1) invert(0);; height:100px; width:100px;">
-                        <h5 class="align-middle text-capitalize">{{d.nama}}</h5>
-                        <p class="align-middle">{{d.nim}}</p>
-                        <input type="radio" value="choice" name="{{d.id}}">
-                        <button class="btn float-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="font-weight: bold; background-color: #FF4747; color: #ffffff;">Vote</button>
+    <div class="card p-4">
+        <h5 class="text-capitalize text-center">{{agenda}}</h5><br>
+        
+        <div class="row">
+        {% if kandidat %}
+        {% for k in kandidat %}
+            <div class="col-sm-4">
+                <div class="card" style="width: 18rem; margin-bottom: 20px;">
+                    {% if k.image %}
+                    <img src="{{k.image.url}}" class="card-img-top text-center" alt="connect" style="filter: brightness(1) invert(0); height:auto; width:auto; margin: 20px;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize text-center">{{k.nama}}</h5>
+                        <p class="card-text text-center">{{k.nim}}</p>
+                        <center><a href="#" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#poll_{{k.id}}">Pilih</a></center>
                     </div>
                 </div>
             </div>
-        </div>
-        <button type="submit">Pilih</button>
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog rounded-3">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #0E5E4E;">
-                        <h5 class="modal-title" id="staticBackdropLabel" style="color: #ffffff;">Pernyataan</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="color: #ffffff;"></button>
-                    </div>
-                    <div class="modal-body">
-                        Apa Anda yakin ?
-                    </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="poll_{{k.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Persetujuan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Apa Anda Yakin ?
+                        </div>
                         <div class="modal-footer">
-                            <a href="/pemilih/vote/{{d.id}}"><button type="button" class="btn" name="choice" style="color: #ffffff; background-color: #37BFA4;"> Ya </button></a>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Tidak </button>
+                            <button type="button" class="btn btn-danger">Tidak</button>
+                            <!-- <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ya</button> -->
+                            <a id="btn" onclick="disable()" href="{% url 'buat_vote' id k.id %}"><button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ya</button></a>
                         </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>        
+
+        {% endfor %}
+        {% else %}
+        <h6 class="text-center">~ Belum ada kandidat ~</h6>
+        {% endif %}
+        </div>
+    
     </div>
-</form>
+    
+<!-- </form> -->
 {% endblock %}

@@ -22,7 +22,7 @@
 			width: 350px;
 			margin-top: auto;
 			margin-bottom: auto;
-			background: #ffffff;
+			background: #74cfbf;
 			position: relative;
 			display: flex;
 			justify-content: center;
@@ -34,15 +34,18 @@
 			border-radius: 5px;
 
 		}
+		a{
+			color: #fff;
+		}
 
 		.form_container {
 			margin-top: 20px;
 		}
 		
-		#form-title{
+		/* #form-title{
 			color: rgb(14, 202, 139);
 			
-		}
+		} */
 		#form-input{		
 			background-color: rgb(209, 209, 209);
 			border: 0.5 !important;
@@ -95,6 +98,7 @@
 
 </head>
 <body>
+	{% load crispy_forms_tags %}
 	<a href="/adminPage">Admin</a>
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
@@ -106,21 +110,16 @@
 				<div class="d-flex justify-content-center form_container">
                     <form method="POST" action="">
                         {% csrf_token %}
-						<div class="input-group mb-3">
-							<!-- <div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div> -->
-							<input id="form-input" type="text" name="username" placeholder="Username..." class="form-control" required>
+						{{form|crispy}}
+						<!-- <div class="input-group mb-3">
+							<input id="form-input" type="text" name="username" placeholder="Ussername..." class="form-control" required>
 						</div>
 						<div class="input-group mb-2">
-							<!-- <div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div> -->
-								<input id="form-input" type="password" name="password" placeholder="Password..." class="form-control" required>
-						</div>
+							<input id="form-input" type="password" name="password" placeholder="Password..." class="form-control" required>
+						</div> -->
 
-							<div class="d-flex justify-content-center mt-3 login_container">
-				 				<input class="btn login_btn" type="submit" value="Masuk">
+							<div class="d-flex justify-content-center mt-3 login_container ">
+				 				<input class="btn login_btn shadow" type="submit" value="Masuk">
 				   			</div>
 					</form>
 

@@ -5,7 +5,7 @@ from .models import *
 class KandidatForm(forms.ModelForm):
     class Meta:
         model = Kandidat
-        fields = '__all__'
+        exclude = ['owner']
         widgets = {
             'nama': forms.TextInput(attrs={'style': 'border-color:#1AB394; border-radius:10px;'}),
             'jk': forms.Select(attrs={'style': 'width:220px; height:30px; border-color:#1AB394; border-radius:10px;'}),
@@ -40,7 +40,7 @@ class KandidatForm(forms.ModelForm):
 class PemilihanForm(forms.ModelForm):
     class Meta:
         model = Agenda
-        fields = '__all__'
+        exclude = ['owner']
         widgets = {
             'judul': forms.TextInput(attrs={'style': 'height:100px; border-color:#1AB394; border-radius:10px;'}),
             'waktu_awal': forms.DateTimeInput(format='%Y-%m-%dT%H:%M', attrs={'type':'datetime-local','style': 'width:220px; border-color:#1AB394; border-radius:10px;'}),

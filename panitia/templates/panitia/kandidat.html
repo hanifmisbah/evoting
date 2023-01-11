@@ -5,10 +5,9 @@
     <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
         {{form.media}}
-        <!-- {{form.media}} -->
         <div class="row mb-4">
             <div class="col-2">
-                <!-- {{form.foto}} -->
+                {{form.image}}
             </div>
         </div>
         <div class="row">

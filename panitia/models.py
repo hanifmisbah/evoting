@@ -1,7 +1,6 @@
-from distutils.command.install_egg_info import to_filename
-from email.policy import default
 from django.db import models
 from ckeditor.fields import RichTextField
+from account.models import *
 
 # Create your models here.
 class Agenda(models.Model):
@@ -9,7 +8,7 @@ class Agenda(models.Model):
         ('aktif', 'aktif'),
         ('tidak aktif', 'tidak aktif'),
     ]
-
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='panitia_agenda')
     judul = models.CharField(unique=True, max_length=100)
     waktu_awal = models.DateTimeField(blank=True, null=True)
     waktu_akhir = models.DateTimeField(blank=True, null=True)
@@ -45,9 +44,9 @@ class Kandidat(models.Model):
         ('Perempuan', 'Perempuan'),
     ]
 
-    # input_formats = ['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y']
-
-    # foto = models.ImageField(null=True, blank=True, upload_to='images/')
+    # foto = models.ImageField(upload_to='images/')
+    image = models.ImageField(default='../static/img/icon.png', upload_to='images/', blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='panitia_kandidat')
     nama = models.CharField(max_length=26)
     jurusan = models.ForeignKey(Jurusan, on_delete=models.CASCADE, related_name='bagian',blank=True, null=True)
     jk = models.CharField(default='Laki-Laki', choices=jenis_kelamin, max_length=9)

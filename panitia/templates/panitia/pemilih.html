@@ -1,0 +1,36 @@
+{% extends "base3.html" %}
+{% block content %}
+<h4>Pemilih</h4><hr><br>
+
+<div class='mt-2 mb-2'><a href="{% url 'regis_pemilih' %}"><button class="btn" style="font-weight: bold; background-color: #37BFA4; color: #ffffff;">Tambah Pemilih</button></a></div>
+
+<table class="table table-responsive table-striped table-sm" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+    <thead style="border-top-left-radius: 10px; border-top-right-radius: 10px">
+        <tr style="border-top-left-radius: 10px; border-top-right-radius: 10px">
+            <th scope="col" style="border-top-left-radius: 10px;">No</th>
+            <th scope="col">NIM</th>
+            <th scope="col">Username</th>
+            <!-- <th scope="col">Password</th> -->
+            <th scope="col">Jurusan</th>
+            <th scope="col" style="border-top-right-radius: 10px">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in pemilih %}
+        <tr>
+            <th class="align-middle" scope="row" style="border-bottom-left-radius: 10px;">{{forloop.counter}}</th>
+            <td class="align-middle">{{d.nim}}</td>
+            <td class="align-middle text-capitalize">{{d.username}}</td>
+            <!-- <td class="align-middle text-capitalize">{{d.password}}</td> -->
+            <td class="align-middle text-capitalize">{{d.user.jurusan}}</td>
+            <td class="align-middle">
+                <a class="btn btn-sm" href="#"><i class="fa-solid fa-eye"></i></a>
+                <a class="btn btn-sm" href="#"><i class="fas fa-pen"></i></a>
+                <a class="btn btn-sm" href="#"><i class="fa-solid fa-trash"></i></a>
+            </td style="border-bottom-right-radius: 10px;">
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

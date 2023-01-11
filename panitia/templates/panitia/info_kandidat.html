@@ -1,0 +1,34 @@
+{% extends "base3.html" %}
+{% block content %}
+<h4>Hasil Pemilihan</h4><hr><br>
+{% for info in info %}
+<!-- <p class="text-capitalize">Agenda : {{info.agenda}}</p>
+<p class="text-capitalize">Tanggal Pelaksanaan : {{info.agenda.waktu_awal}}</p><hr><br> -->
+    <p>{{info.kandidat}}  -  {{info.dcount}}</p>
+    <!-- <table class="table">
+        <tbody>
+            <tr>
+                <td class="col-1">{{forloop.counter}}</td>
+                <td class="col-3">~ FOTO ~</td>
+                <td class="col-2">~ NIM ~</td>
+                <td class="col-3">{{info.kandidat.nama}}</td>
+                <td>{{info.dcount}}</td>
+            </tr>
+            <tr>
+                <td class="col-1">{{forloop.counter}}</td>
+                <td class="col-3">~ FOTO ~</td>
+                <td class="col-2">~ NIM ~</td>
+                <td class="col-3">{{info.kandidat.nama}}</td>
+                <td>{{info.dcount}}</td>
+            </tr>
+            <tr>
+                <td class="col-1">{{forloop.counter}}</td>
+                <td class="col-3">~ FOTO ~</td>
+                <td class="col-2">~ NIM ~</td>
+                <td class="col-3">{{info.kandidat.nama}}</td>
+                <td>{{info.dcount}}</td>
+            </tr>
+        </tbody>
+    </table> -->
+{% endfor %}
+{% endblock %}

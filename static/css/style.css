@@ -88,10 +88,6 @@ tr td a:hover{
     color: #ffffff;
 }
 
-.card:hover{
-    background-color: rgb(221, 221, 221);
-}
-
 .django-ckeditor-widget{
     width: 50%;
   }

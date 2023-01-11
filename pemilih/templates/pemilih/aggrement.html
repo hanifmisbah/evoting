@@ -1,0 +1,25 @@
+{% extends "base2.html" %}
+{% block title %}Vote{% endblock %}
+{% block content %}
+    
+{% for f in agenda %}
+    
+    <figure class="text-center">
+        <blockquote class="blockquote">
+            <h5>Pernyataan</h5><hr>
+            <h6 class="text-capitalize">{{f.agenda}} :</h6><br>
+            <p>Saya menyatakan vote ini berdasarkan kesadaran sendiri dan tanpa paksaan.</p>
+            <div class="container-fluid"> <br>
+
+                <div class="float-end" style="margin-right: 200px;">
+                    <div class="d-inline"><a href="{% url 'cancel-agenda' f.id %}"><button type="button" class="btn btn-danger">Tidak</button></a></div>
+                    <div class="d-inline"><a href="{% url 'vote' f.id %}"><button type="button" class="btn btn-success">Setuju</button></a></div>
+                </div>
+
+            </div>
+        </blockquote>
+    </figure>
+
+{% endfor %}
+
+{% endblock %}

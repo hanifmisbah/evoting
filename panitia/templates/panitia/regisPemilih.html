@@ -1,0 +1,20 @@
+{% extends "base3.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<h4>Tambah Pemilih</h4><hr><br>
+
+<div class="container-fluid">
+    <div class="col-8">
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-primary float-end">Daftar</button>    
+        </form>
+    </div>
+    
+</div>
+
+
+{% endblock %}

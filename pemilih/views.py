@@ -1,49 +1,67 @@
-from concurrent.futures import process
+from datetime import datetime
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.http import urlencode
 
-# from .encrypt import encryptData, decryptData
+from panitia.models import *
+from .models import *
 
-from panitia import models as panitiamodels
-from .models import Vote
+from .forms import *
 
 # Create your views here.
-# @login_required(login_url='/account/login')
-def index(req):
-    agenda = panitiamodels.Agenda.objects.filter(status='aktif').values()
+def index(req, year=datetime.now().year):
+    try:
+        agenda = Agenda.objects.filter(owner__jurusan=req.user.jurusan, waktu_awal__year=year, status='aktif').values()
+    except:
+        return redirect('/')
     return render(req, 'pemilih/index.html', {
         'data' : agenda,
+        # 'votes' : votes,
     })
 
-def showdatakandidat(req, id):
-    if req.method == 'GET':
-        showdetail= panitiamodels.Agenda.objects.filter(pk=id).first()
-        detailbyid = showdetail.agenda.all()
-        
-        return render(req, 'pemilih/voting.html', {
-            'data' : detailbyid,
-            # 'detail' : showdetail,
-        })
 
-def vote(req, id):
-    get_kandidat = panitiamodels.Kandidat.objects.get(pk=id)
-    vote_id = Vote.objects.create(kandidat=get_kandidat)
-    if vote_id:
-        vote_id.kandidat.vote += 1
-        # print(result)
-    messages.success(req, f'Vote Berhasil')
+def select_agenda(req, agenda_id):
+    agenda = Agenda.objects.get(pk=agenda_id)
+    agenda_id = Poll.objects.create(owner=req.user, agenda=agenda)
+    return redirect('aggrement')    
+
+
+def aggrement(req):
+    agenda = Poll.objects.order_by('-id')[:1]
+    return render(req, 'pemilih/aggrement.html',{
+        'agenda':agenda,
+    })
+
+
+def cancel_agenda(req, agenda_id):
+    Poll.objects.filter(owner=req.user, pk=agenda_id).delete()
+    return redirect('/pemilih')
+
+
+def polls(req, id):
+    polls = Poll.objects.get(pk=id)
+    filter_agenda = polls.agenda
+    kandidat = filter_agenda.agenda.all()
+    print(kandidat)
+    
+    return render(req, 'pemilih/voting.html',{
+        'kandidat':kandidat,
+        'agenda':filter_agenda,
+        'id':id,
+    })
+    
+
+def buat_vote(req, agenda_id, id):
+    kandidats = Kandidat.objects.get(pk=id)
+    buat_pilihan = Poll.objects.filter(owner=req.user, pk=agenda_id).update(kandidat=kandidats)
     return redirect('/pemilih')
     
-# def vote(req, id):
-#     agenda = panitiamodels.Agenda.objects.get(pk=id)
-#     kandidat = agenda.agenda.all()
-#     if req.POST:
-#         voting = req.POST['choice']
-#         process_vote = kandidat.objects.get(id=vote)
-#         process_vote.vote += 1
-#         process_vote.save()
-        
-#         messages.success(req, f'Vote Berhasil')
-#         return redirect('/pemilih')
+    
+    
+    
+    
+    
+    
+    
+    
+    

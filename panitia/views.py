@@ -1,38 +1,31 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.forms.models import model_to_dict
-
-from pemilih.views import vote
+from django.http import HttpResponseRedirect
+from django.utils.http import urlencode
+from django.db.models import Count
 
 from panitia.models import *
-from pemilih.models import Vote 
-from account.models import User 
-from .forms import KandidatForm, PemilihanForm
+from panitia.forms import *
+from pemilih.models import * 
+from account.models import * 
+from account.forms import * 
 
 # Create your views here.
-def index(req):
-    today = datetime.now().date()
-    kandidat = Kandidat.objects.all().order_by('-id')
-    agenda = Agenda.objects.first()
-    kandidat_byagenda = agenda.agenda.all()
-
-    print(kandidat_byagenda)
-
-    return render(req, 'panitia/index.html', {
-        'kandidat' : kandidat,
-        'agenda' : agenda,
-        'kandidats' : kandidat_byagenda,
-    })
+def index(req, year=datetime.now().year, month=datetime.now().month):
+    result = Agenda.objects.filter(waktu_awal__year=year, owner=req.user)    
+    return render(req, 'panitia/index.html',({
+        'result':result,
+        'user':req.session['user'],
+    }))
     
-def agendafilter(req):
-    agenda = Agenda.objects.filter(status='aktif').values()
-    
-    return render(req, 'panitia/agendafilter.html', {
-        'agenda':agenda,
-        # 'data' : detailbyid,
+def info_kandidat(req, id):
+    info = Poll.objects.filter(agenda=id).annotate(dcount=Count('kandidat'))
+    print(info)
+    return render(req, 'panitia/info_kandidat.html', {
+        'info':info,
     })
+        
 def kandidatfilter(req, id):
     if req.method == 'GET':
         showdetail= Agenda.objects.filter(pk=id).first()
@@ -43,34 +36,23 @@ def kandidatfilter(req, id):
         'data' : detailbyid,
     })
 
-# @login_required(login_url='/account/login')
-def cari(req):
-    if req.POST:
-        cari = req.POST['cari']
-        return render(req, 'panitia/index.html', {
-            'cari' : cari,
-        })
-    else:
-        return render(req, 'panitia/index.html', {
-
-        })
-
-# @login_required(login_url='/account/login')
 def agenda(req):
-    agenda_vote = Agenda.objects.order_by('-id')
+    agenda_vote = Agenda.objects.filter(owner=req.user).order_by('-id')
     return render(req, 'panitia/agenda.html', {
         'data' : agenda_vote,
     })
 
-# @login_required(login_url='/account/login')
 def tambah_agenda(req):
     form = PemilihanForm()
     if req.POST:
         form = PemilihanForm(req.POST)
         if form.is_valid():
+            form.instance.owner=req.user
             form.save()
             print(form)
         return redirect('agenda')
+    else:
+        form = PemilihanForm()
     pemilihan = Agenda.objects.all()
     return render(req, 'panitia/tambah_agenda.html', {
         'data' : pemilihan,
@@ -86,6 +68,7 @@ def agenda_update(req, id):
     if req.POST:
         form = PemilihanForm(req.POST, instance=agenda)
         if form.is_valid():
+            form.instance.owner=req.user
             form.save()
             return redirect('/agenda')
 
@@ -103,7 +86,7 @@ def agenda_delete(req, id):
 
 # @login_required(login_url='/account/login')
 def list_kandidat(req):
-    kandidat = Kandidat.objects.order_by('-id')
+    kandidat = Kandidat.objects.filter(owner=req.user).order_by('-id')
     return render(req, 'panitia/list_kandidat.html', {
         'data' : kandidat,
     })
@@ -112,12 +95,17 @@ def list_kandidat(req):
 def kandidat(req):
     form = KandidatForm()
     if req.POST:
-        form = KandidatForm(req.POST)
+        form = KandidatForm(req.POST, req.FILES)
         if form.is_valid():
+            form.instance.owner=req.user
             form.save()
+            img_obj = form.instance
         return redirect('list_kandidat')
+    else:
+        form = KandidatForm()
     return render(req, 'panitia/kandidat.html', {
         'form' : form,
+        'img_obj' : img_obj,
     })
     
 # @login_required(login_url='/account/login')
@@ -129,6 +117,7 @@ def kandidat_update(req, id):
     if req.POST:
         form = KandidatForm(req.POST, instance=kandidat)
         if form.is_valid():
+            form.instance.owner=req.user.jurusan
             form.save()
             return redirect('list_kandidat')
 
@@ -141,3 +130,24 @@ def kandidat_delete(req, id):
     hapus = Kandidat.objects.filter(pk=id).delete()
     # messages.info(req, f'{hapus.judul} berhasil dihapus')
     return redirect('/list_kandidat')
+
+def pemilih(req):
+    pemilih = User.objects.filter(jurusan=req.user.jurusan, is_pemilih=True).values()
+    return render(req, 'panitia/pemilih.html', {
+        'pemilih':pemilih,
+    })
+
+
+def regisPemilih(req):
+    form = RegisForm(initial={'jurusan':req.user.jurusan})
+    print(form)
+    if req.POST:
+        form = RegisForm(req.POST)
+        if form.is_valid():
+            form.instance.owner=req.user.jurusan
+            form.save()
+            return redirect('data_pemilih')
+    return render(req, 'panitia/regisPemilih.html', {'form':form,})
+
+
+

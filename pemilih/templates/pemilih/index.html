@@ -2,46 +2,34 @@
 {% block title %}Vote{% endblock %}
 {% block content %}
 
-{% if messages %}
+<!-- {% if messages %}
 {% for message in messages %}
   <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
 {% endfor %}
-{% endif %}
-<h2>Vote</h2>
+{% endif %} -->
+<h2>Vote</h2><br>
+<hr>
+{% if data %}
     {% for d in data %}
         <div class="container">
             <div class="card mb-3" style="border-color: #1A9D83;">
-                <div class="card-body p-2">
+                <div class="card-body p-2" id="card">
                     <div class="row">
                         <div class="col-10">
                             <h6 class="align-middle text-capitalize">{{d.judul}}</h6>
                         </div>
                         <div class="col-2">
-                            <a href="#"><button type="button" style="margin-left: 20px;" class="btn float-end p-0" data-bs-toggle="modal" data-bs-target="#vote_{{d.id}}"><i class='bx bxs-hand-up' style="margin:3px; font-size: 20px;"></i></button></a>
+                            <a id="cardBtn" disabled="disabled" href="{% url 'select-agenda' d.id %}"><button type="button" style="margin-left: 20px;" class="btn float-end p-0"><i class='bx bxs-hand-up' style="margin:3px; font-size: 20px;"></i></button></a>
                             <a href="#"><button type="button" class="btn float-end p-0"><i class='bx bxs-info-circle' style="margin:3px; font-size: 20px;"></i></button></a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Modal -->
-            <div class="modal fade" id="vote_{{d.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" style="background-color: #0E5E4E;">
-                            <h5 class="modal-title" id="staticBackdropLabel" style="color: #ffffff;">Pernyataan</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="color: #ffffff;"></button>
-                        </div>
-                        <div class="modal-body">
-                            Saya menyatakan bahwa saya melakukan voting ini dengan sadar dan tanpa adanya paksaan dari pihak lain
-                        </div>
-                        <div class="modal-footer">
-                            <a href="{{d.id}}/data"><button type="button" class="btn" style="color: #ffffff; background-color: #37BFA4;"> Ya </button></a>
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Tidak </button>
-                        </div>
-                    </div>
-                </div>
-            </div>   
-    {% endfor %} 
+        </div>        
+    {% endfor %}
+{% else %}
+Belum ada agenda untuk tahun ini...
+{% endif %}
 {% endblock %}
+
+
