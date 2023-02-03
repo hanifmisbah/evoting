@@ -10,13 +10,14 @@ from .forms import *
 
 # Create your views here.
 def index(req, year=datetime.now().year):
+    polls = Poll.objects.all().values()
     try:
         agenda = Agenda.objects.filter(owner__jurusan=req.user.jurusan, waktu_awal__year=year, status='aktif').values()
     except:
         return redirect('/')
     return render(req, 'pemilih/index.html', {
         'data' : agenda,
-        # 'votes' : votes,
+        'polls' : polls,
     })
 
 

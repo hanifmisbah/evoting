@@ -21,7 +21,12 @@ def index(req, year=datetime.now().year, month=datetime.now().month):
     
 def info_kandidat(req, id):
     info = Poll.objects.filter(agenda=id).annotate(dcount=Count('kandidat'))
-    print(info)
+    
+    polls = Poll.objects.all().values(kandidat)
+    info_kandidat = Kandidat.objects.all().values(id)
+    counts = info_kandidat.filter(info_kandidat=polls).count()
+    
+    print(counts)
     return render(req, 'panitia/info_kandidat.html', {
         'info':info,
     })
@@ -87,6 +92,7 @@ def agenda_delete(req, id):
 # @login_required(login_url='/account/login')
 def list_kandidat(req):
     kandidat = Kandidat.objects.filter(owner=req.user).order_by('-id')
+    print(kandidat.values())
     return render(req, 'panitia/list_kandidat.html', {
         'data' : kandidat,
     })

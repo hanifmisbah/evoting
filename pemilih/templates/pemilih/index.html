@@ -9,6 +9,7 @@
 {% endif %} -->
 <h2>Vote</h2><br>
 <hr>
+{{polls}}
 {% if data %}
     {% for d in data %}
         <div class="container">
@@ -19,8 +20,14 @@
                             <h6 class="align-middle text-capitalize">{{d.judul}}</h6>
                         </div>
                         <div class="col-2">
-                            <a id="cardBtn" disabled="disabled" href="{% url 'select-agenda' d.id %}"><button type="button" style="margin-left: 20px;" class="btn float-end p-0"><i class='bx bxs-hand-up' style="margin:3px; font-size: 20px;"></i></button></a>
-                            <a href="#"><button type="button" class="btn float-end p-0"><i class='bx bxs-info-circle' style="margin:3px; font-size: 20px;"></i></button></a>
+                            <center>
+                                {% if po %}
+                                <span class="badge bg-success">Voted</span>
+                                {% else%}
+                                <a id="cardBtn" disabled="disabled" href="{% url 'select-agenda' d.id %}"><button type="button" style="margin-left: 20px;" class="btn float-end p-0"><i class='bx bxs-hand-up' style="margin:3px; font-size: 20px;"></i></button></a>
+                                <a href="#"><button type="button" class="btn float-end p-0"><i class='bx bxs-info-circle' style="margin:3px; font-size: 20px;"></i></button></a>
+                                {% endif %}
+                            </center>
                         </div>
                     </div>
                 </div>
